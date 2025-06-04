@@ -1,130 +1,71 @@
+Absolutely! Here’s a clear, detailed **non-Docker** README for your Blogzone app, tailored to your backend running on port 3000 and MongoDB Atlas usage:
 
 ---
 
-````markdown
-# 📰 Blogzone
+# Blogzone
 
-**Blogzone** is a full-stack blog platform with a Node.js backend and a pure HTML/CSS frontend. It supports user registration, login, blog creation, and role-based dashboards. Data is stored in MongoDB and secured using JWT-based authentication.
+Blogzone is a simple blog application with a backend API built using Node.js and MongoDB Atlas.
 
----
+## Prerequisites
 
-## 🚀 Features
+Before you start, ensure you have the following installed:
 
-- ✍️ Users can write and publish blogs
-- 🔐 Secure authentication using JWT tokens
-- 👥 Separate dashboards for admins and users
-- 📂 MongoDB for data storage
-- 🎨 Static HTML/CSS frontend
+* [Node.js](https://nodejs.org/) (v16 or later recommended)
+* npm (comes with Node.js)
+* A MongoDB Atlas cluster (or local MongoDB instance)
+* Git (optional, to clone the repo)
 
----
+## Installation and Setup
 
-## 💻 Requirements
+1. **Clone the repository**
 
-- [Node.js](https://nodejs.org/) (v16 or newer)
-- [MongoDB](https://www.mongodb.com/try/download/community) (running locally or using MongoDB Atlas)
+   ```bash
+   git clone https://github.com/teddy5456/Blogzone.git
+   cd Blogzone/blogzone-backend
+   ```
 
----
+2. **Install backend dependencies**
 
-## 📦 Installation
+   ```bash
+   npm install
+   ```
 
-### 1. Clone the Repository
+3. **Configure environment variables**
 
-```bash
-git clone https://github.com/teddy5456/Blogzone.git
-cd Blogzone
-````
+   Create a `.env` file in the `blogzone-backend` folder with the necessary MongoDB connection string and other variables.
 
-### 2. Install Backend Dependencies
+   Example `.env`:
 
-```bash
-cd blogzone-backend
-npm install
-```
+   ```
+   MONGO_URI=your_mongodb_atlas_connection_string
+   PORT=3000
+   JWT_SECRET=your_jwt_secret_key
+   ```
 
----
+   > Make sure to replace the values with your actual MongoDB URI and secret key.
 
-## 🏃 Running the App
+4. **Run the backend server**
 
-### 1. Start MongoDB
+   ```bash
+   node server.js
+   ```
 
-Make sure your MongoDB server is running in the background:
+5. **Access the backend API**
 
-```bash
-mongod
-```
+   Open your browser or API client and visit:
 
-### 2. Start the Backend Server
+   ```
+   http://localhost:3000
+   ```
 
-```bash
-cd blogzone-backend
-npm start
-```
+   Your backend server will be running and connected to MongoDB Atlas.
 
-Once running, the terminal should show:
+## Notes
 
-```
-Server is running on port 5000
-Connected to MongoDB
-```
-
-### 3. Open the Frontend
-
-Open the `.html` files located in the root of the project with your browser:
-
-* `index.html` – Homepage
-* `login.html` – Login screen
-* `dashboard.html` – User/Admin dashboard
-* Other HTML files for registration, blog creation, etc.
-
-No need for a web server — the HTML files are static.
+* The backend listens on port **3000** by default.
+* MongoDB Atlas must be properly set up and accessible for the app to work.
+* The frontend is a static folder served separately or via any static server.
 
 ---
 
-## 📂 Project Structure
-
-```
-Blogzone/
-├── blogzone-backend/      # Node.js backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── styles/                # CSS styles
-├── assets/                # Static images/assets
-├── index.html             # Main landing page
-├── login.html             # Login page
-├── dashboard.html         # User/Admin dashboard
-└── other .html files      # Blog and profile pages
-```
-
----
-
-## 🧪 Sample API Endpoints
-
-| Method | Endpoint        | Description              |
-| ------ | --------------- | ------------------------ |
-| POST   | `/api/register` | Register a new user      |
-| POST   | `/api/login`    | Log in and receive a JWT |
-| GET    | `/api/blogs`    | Fetch all blog posts     |
-| POST   | `/api/blogs`    | Create a new blog post   |
-
-Authorization is required for certain routes (JWT Bearer token in headers).
-
----
-
-## 📝 Notes
-
-* CORS is already enabled in the backend for frontend/backend integration.
-* You can customize user roles and permissions in the backend.
-* If using MongoDB Atlas, update the connection string in `server.js`.
-
----
-
-## 📜 License
-
-MIT License — feel free to use, modify, and share.
-
-```
-
----
-
+If you want me to add instructions for the frontend or running the whole app with Docker later, just ask!
