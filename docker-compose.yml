@@ -1,13 +1,15 @@
-version: "3.8"
+
 
 services:
   mongo:
-    image: mongo
+    image: mongo:6.0
+    platform: linux/amd64
     container_name: blogzone-mongo
     volumes:
       - mongo-data:/data/db
     ports:
       - "27017:27017"
+
 
   backend:
     build:
