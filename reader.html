@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogZone | Read Our Articles</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/blog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="blog-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>BlogZone</span>
+            </a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="blogs.html" class="active">Blogs</a>
+                <a href="categories.html">Categories</a>
+                <a href="about.html">About</a>
+            </nav>
+            <div class="search-bar">
+                <input type="text" placeholder="Search blogs...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Filter -->
+    <section class="category-filter">
+        <div class="container">
+            <div class="category-list">
+                <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="technology">Technology</button>
+                <button class="category-btn" data-category="lifestyle">Lifestyle</button>
+                <button class="category-btn" data-category="business">Business</button>
+                <button class="category-btn" data-category="travel">Travel</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="blog-container">
+        <div class="container">
+            <!-- Blog Posts Grid -->
+            <div class="blog-grid" id="blogGrid">
+                <!-- Blog posts will be dynamically inserted here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button id="prevPage" disabled><i class="fas fa-chevron-left"></i> Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage" disabled>Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>BlogZone</h3>
+                    <p>Your source for quality content on various topics from passionate writers.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="blogs.html">Blogs</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BlogZone. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+<div class="modal-overlay" id="blogModal">
+    <div class="modal-container">
+        <button class="close-modal" aria-label="Close modal">
+            <i class="fas fa-times"></i>
+        </button>
+
+        
+        <article class="blog-article">
+            <!-- Loading state (initially visible) -->
+            <div class="loading-state">
+                <div class="spinner"></div>
+                <p class="loading-text">Loading article content...</p>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            
+            <!-- Article content (initially hidden) -->
+            <div class="article-content" style="display: none;">
+                <div class="article-content-container">
+                    <!-- Main content area -->
+                    <div class="article-main">
+                        <header class="article-header">
+                            <div class="article-meta">
+                                <div class="categories"></div>
+                                <span class="publish-date"></span>
+                            </div>
+                            <h1 class="article-title"></h1>
+                            
+                            <div class="author-card">
+                                <img class="author-avatar" src="https://isobarscience.com/wp-content/uploads/2020/09/default-profile-picture1.jpg" alt="">
+                                <div class="author-info">
+                                    <div class="author-name"></div>
+                                    <div class="author-bio"></div>
+                                    <div class="author-social"></div>
+                                </div>
+                                <div class="article-stats">
+                                    <span class="read-time"></span>
+                                    <span class="views-count"></span>
+                                </div>
+                            </div>
+                        </header>
+                        
+                        <div class="featured-image-container">
+                            <div class="featured-image"></div>
+                        </div>
+                        
+                        <div class="article-body"></div>
+                        
+                        <footer class="article-footer">
+                            <div class="article-tags"></div>
+                            
+                            <div class="article-actions">
+                                <button class="action-btn like-btn">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">0</span>
+                                </button>
+                                <button class="action-btn bookmark-btn">
+                                    <i class="far fa-bookmark"></i>
+                                    <span>Save</span>
+                                </button>
+                                <button class="action-btn share-btn">
+                                    <i class="fas fa-share-alt"></i>
+                                    <span>Share</span>
+                                </button>
+                            </div>
+                        </footer>
+
+                        <div class="comments-section">
+    <h3><i class="far fa-comments"></i> Comments <span class="comment-count">0</span></h3>
+    <div class="comments-list"></div>
+    <form class="comment-form">
+        <h4>Leave a Comment</h4>
+        <textarea placeholder="Share your thoughts..." required></textarea>
+        <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Post Comment
+        </button>
+    </form>
+</div>
+                        
+                        <div class="comments-section">
+                            <h3><i class="far fa-comments"></i> Comments <span class="comment-count">0</span></h3>
+                            <div class="comments-list"></div>
+                            <form class="comment-form">
+                                <h4>Add your comment</h4>
+                                <textarea placeholder="Share your thoughtful response..." required></textarea>
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i> Post Comment
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="related-articles" style="display: none;"></div>
+                    </div>
+                    
+                    <!-- Sidebar area -->
+                    <div class="article-sidebar">
+                        <div class="sidebar-section author-details">
+                            <div class="author-details-header">
+                                <img class="author-details-avatar" src="assets/images/default-avatar.jpg" alt="">
+                                <div>
+                                    <div class="author-details-name"></div>
+                                    <div class="author-details-stats">
+                                        <span><i class="fas fa-book"></i> 24 articles</span>
+                                        <span><i class="fas fa-users"></i> 5.2k followers</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="author-details-bio"></div>
+                            <div class="author-details-social"></div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Newsletter</h3>
+                            <form class="newsletter-form">
+                                <input type="email" placeholder="Your email address" required>
+                                <button type="submit">Subscribe</button>
+                            </form>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Popular Tags</h3>
+                            <div class="popular-tags"></div>
+                        </div>
+                        
+                        <div class="sidebar-section">
+                            <h3>Table of Contents</h3>
+                            <div class="table-of-contents"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+
+    <script src="scripts/blog.js"></script>
+</body>
+</html>

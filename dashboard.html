@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | BlogZone</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>BlogZone</span>
+            </a>
+            <button class="sidebar-toggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h4 class="nav-section-title">Main</h4>
+                <ul>
+                    <li class="active">
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                            <span>Newsletter</span>
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Content</h4>
+                <ul>
+                    <li>
+                        <a href="create-blog.html">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Create Post</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-alt"></i>
+                            <span>My Posts</span>
+                            <span class="badge">24</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Drafts</span>
+                            <span class="badge">5</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-folder"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Monetization</h4>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Earnings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-ad"></i>
+                            <span>Ad Units</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-users"></i>
+                            <span>Memberships</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Settings</h4>
+                <ul>
+                    <li>
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Design</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="upgrade-card">
+                <h4>Upgrade to Pro</h4>
+                <p>Unlock advanced features and monetization options</p>
+                <a href="#" class="btn btn-primary btn-sm">Upgrade Now</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="top-nav-left">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search posts, analytics, etc...">
+                </div>
+            </div>
+            
+            <div class="top-nav-right">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                
+                <div class="user-dropdown">
+                    <div class="user-avatar">
+                        <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                    </div>
+                    <span class="user-name">John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                    
+                    <div class="dropdown-menu">
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="container-fluid">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h1>Welcome back, John!</h1>
+                        <p>You have 2 drafts and 3 scheduled posts. Your last post got 245 views.</p>
+                        <a href="create-blog.html" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create New Post
+                        </a>
+                    </div>
+                    <div class="welcome-image">
+                        <img src="/assets/images/6333050.jpg" alt="Writing illustration">
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>1,245</h3>
+                            <p>Total Views</p>
+                            <span class="stat-change up">
+                                <i class="fas fa-arrow-up"></i> 12% from last week
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>356</h3>
+                            <p>Subscribers</p>
+                            <span class="stat-change up">
+                                <i class="fas fa-arrow-up"></i> 5 new today
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>42</h3>
+                            <p>Comments</p>
+                            <span class="stat-change down">
+                                <i class="fas fa-arrow-down"></i> 2% from last week
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>$128.50</h3>
+                            <p>Earnings</p>
+                            <span class="stat-change up">
+                                <i class="fas fa-arrow-up"></i> 8% from last month
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Posts -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Recent Posts</h2>
+                        <a href="#" class="btn btn-outline">View All</a>
+                    </div>
+                    
+                    <div class="posts-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Views</th>
+                                    <th>Comments</th>
+                                    <th>Published</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="post-title">10 Tips for Better Blog Writing</a>
+                                        <span class="post-category">Writing</span>
+                                    </td>
+                                    <td><span class="badge published">Published</span></td>
+                                    <td>1,245</td>
+                                    <td>42</td>
+                                    <td>2 days ago</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon" title="View">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </button>
+                                            <button class="btn-icon" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="post-title">The Future of AI in Content Creation</a>
+                                        <span class="post-category">Technology</span>
+                                    </td>
+                                    <td><span class="badge published">Published</span></td>
+                                    <td>892</td>
+                                    <td>36</td>
+                                    <td>1 week ago</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon" title="View">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </button>
+                                            <button class="btn-icon" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="post-title">How to Monetize Your Blog in 2024</a>
+                                        <span class="post-category">Business</span>
+                                    </td>
+                                    <td><span class="badge scheduled">Scheduled</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>Tomorrow</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon" title="View">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </button>
+                                            <button class="btn-icon" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="#" class="post-title">My Travel Experience in Bali</a>
+                                        <span class="post-category">Travel</span>
+                                    </td>
+                                    <td><span class="badge draft">Draft</span></td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-icon" title="Edit">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn-icon" title="View">
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </button>
+                                            <button class="btn-icon" title="Stats">
+                                                <i class="fas fa-chart-bar"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Activity Feed -->
+                <div class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Recent Activity</h2>
+                        <a href="#" class="btn btn-outline">View All</a>
+                    </div>
+                    
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Sarah Johnson</strong> commented on your post <a href="#">"10 Tips for Better Blog Writing"</a></p>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Your post <a href="#">"The Future of AI in Content Creation"</a> got 15 new likes</p>
+                                <span class="activity-time">5 hours ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p><strong>Michael Chen</strong> subscribed to your blog</p>
+                                <span class="activity-time">1 day ago</span>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-share-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <p>Your post was shared 8 times on social media</p>
+                                <span class="activity-time">2 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="scripts/dashboard.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post | BlogZone</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styles to ensure functionality if external CSS files are missing */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f7fa;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            height: 100vh;
+            position: fixed;
+            transition: all 0.3s;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            min-height: 100vh;
+            transition: all 0.3s;
+        }
+        
+        .top-nav {
+            background: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-content {
+            padding: 20px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        .editor-content {
+            min-height: 300px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 10px;
+            background: white;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .editor-toolbar {
+            display: flex;
+            gap: 5px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            flex-wrap: wrap;
+        }
+        
+        .toolbar-btn {
+            background: #f0f0f0;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .tags-container {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .tag {
+            background: #e0e0e0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .settings-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .create-post-container {
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
+        }
+        
+        @media (min-width: 992px) {
+            .create-post-container {
+                flex-direction: row;
+            }
+        }
+        
+        .post-editor {
+            flex: 2;
+        }
+        
+        .post-settings {
+            flex: 1;
+        }
+        
+        .upload-placeholder {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .badge {
+            background: #4f46e5;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+        
+        /* Toast notification styles */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            border-radius: 4px;
+            background: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .toast-success {
+            background: #4CAF50;
+        }
+        
+        .toast-error {
+            background: #F44336;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+        
+        .search-bar input {
+            border: none;
+            background: transparent;
+            padding: 5px;
+            outline: none;
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .create-post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .word-count {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>BlogZone</span>
+            </a>
+            <button class="sidebar-toggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav-section">
+                <h4 class="nav-section-title">Main</h4>
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                            <span>Newsletter</span>
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Content</h4>
+                <ul>
+                    <li class="active">
+                        <a href="create-blog.html">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Create Post</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-file-alt"></i>
+                            <span>My Posts</span>
+                            <span class="badge">24</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-bookmark"></i>
+                            <span>Drafts</span>
+                            <span class="badge">5</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-folder"></i>
+                            <span>Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Monetization</h4>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Earnings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-ad"></i>
+                            <span>Ad Units</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-users"></i>
+                            <span>Memberships</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav-section">
+                <h4 class="nav-section-title">Settings</h4>
+                <ul>
+                    <li>
+                        <a href="profile.html">
+                            <i class="fas fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-cog"></i>
+                            <span>Account</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>Design</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <div class="upgrade-card">
+                <h4>Upgrade to Pro</h4>
+                <p>Unlock advanced features and monetization options</p>
+                <a href="#" class="btn btn-primary btn-sm">Upgrade Now</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="top-nav-left">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search posts, analytics, etc...">
+                </div>
+            </div>
+            
+            <div class="top-nav-right">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">3</span>
+                </button>
+                
+                <div class="user-dropdown">
+                    <div class="user-avatar">
+                        <img src="assets/images/user-avatar.jpg" alt="User Avatar">
+                    </div>
+                    <span class="user-name">John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                    
+                    <div class="dropdown-menu">
+                        <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Create Blog Content -->
+        <div class="dashboard-content">
+            <div class="container-fluid">
+                <div class="create-post-header">
+                    <h1>Create New Post</h1>
+                    <div class="post-actions">
+                        <button class="btn btn-outline" id="saveDraftBtn">
+                            <i class="fas fa-save"></i> Save Draft
+                        </button>
+                        <button class="btn btn-primary" id="previewBtn">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="create-post-container">
+                    <div class="post-editor">
+                        <div class="form-group">
+                            <input type="text" class="form-control post-title" id="postTitle" placeholder="Enter post title...">
+                        </div>
+                        
+                        <div class="editor-toolbar">
+                            <button class="toolbar-btn" id="boldBtn" title="Bold"><i class="fas fa-bold"></i></button>
+                            <button class="toolbar-btn" id="italicBtn" title="Italic"><i class="fas fa-italic"></i></button>
+                            <button class="toolbar-btn" id="headingBtn" title="Heading"><i class="fas fa-heading"></i></button>
+                            <button class="toolbar-btn" id="quoteBtn" title="Quote"><i class="fas fa-quote-right"></i></button>
+                            <button class="toolbar-btn" id="linkBtn" title="Link"><i class="fas fa-link"></i></button>
+                            <button class="toolbar-btn" id="imageBtn" title="Image"><i class="fas fa-image"></i></button>
+                            <button class="toolbar-btn" id="videoBtn" title="Video"><i class="fas fa-video"></i></button>
+                            <button class="toolbar-btn" id="codeBtn" title="Code"><i class="fas fa-code"></i></button>
+                            <button class="toolbar-btn" id="listBtn" title="List"><i class="fas fa-list-ul"></i></button>
+                            <button class="toolbar-btn" id="numberedListBtn" title="Numbered List"><i class="fas fa-list-ol"></i></button>
+                            <div class="toolbar-divider"></div>
+                            <button class="toolbar-btn" id="undoBtn" title="Undo"><i class="fas fa-undo"></i></button>
+                            <button class="toolbar-btn" id="redoBtn" title="Redo"><i class="fas fa-redo"></i></button>
+                        </div>
+                        
+                        <div class="editor-content" id="editorContent" contenteditable="true">
+                            <p>Start writing your post here... You can add images, videos, and format your text using the toolbar above.</p>
+                        </div>
+                        
+                        <div class="word-count">
+                            <span id="wordCount">0 words</span>
+                        </div>
+                    </div>
+                    
+                    <div class="post-settings">
+                        <div class="settings-card">
+                            <h3>Publish</h3>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control" id="statusSelect">
+                                    <option>Draft</option>
+                                    <option selected>Published</option>
+                                    <option>Scheduled</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Visibility</label>
+                                <select class="form-control" id="visibilitySelect">
+                                    <option selected>Public</option>
+                                    <option>Private</option>
+                                    <option>Password Protected</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Publish Date</label>
+                                <input type="datetime-local" class="form-control" id="publishDate" value="">
+                            </div>
+                            
+                            <div class="publish-actions">
+                                <button class="btn btn-primary btn-block" id="publishBtn">
+                                    <i class="fas fa-paper-plane"></i> Publish Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h3>Categories</h3>
+                            <div class="form-group">
+                                <select class="form-control" id="categoriesSelect" multiple>
+                                    <option selected>Technology</option>
+                                    <option>Business</option>
+                                    <option>Lifestyle</option>
+                                    <option>Travel</option>
+                                    <option>Food</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-outline btn-sm">
+                                <i class="fas fa-plus"></i> Add New Category
+                            </button>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h3>Tags</h3>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="tagsInput" placeholder="Add tags..." value="blogging, writing, content">
+                                <div class="tags-container" id="tagsContainer">
+                                    <span class="tag">blogging <i class="fas fa-times"></i></span>
+                                    <span class="tag">writing <i class="fas fa-times"></i></span>
+                                    <span class="tag">content <i class="fas fa-times"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h3>Featured Image</h3>
+                            <div class="featured-image-upload">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Click to upload or drag and drop</p>
+                                    <span>Recommended size: 1200x630px</span>
+                                </div>
+                                <input type="file" id="featuredImage" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                        
+                        <div class="settings-card">
+                            <h3>SEO Settings</h3>
+                            <div class="form-group">
+                                <label>Meta Title</label>
+                                <input type="text" class="form-control" id="metaTitle" placeholder="SEO title">
+                            </div>
+                            <div class="form-group">
+                                <label>Meta Description</label>
+                                <textarea class="form-control" id="metaDescription" rows="3" placeholder="SEO description"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Slug</label>
+                                <input type="text" class="form-control" id="slugInput" placeholder="Post URL">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication status
+            function checkAuth() {
+                const token = localStorage.getItem('blogzone_token');
+                const user = localStorage.getItem('blogzone_user');
+                
+                if (!token || !user) {
+                    alert('Please log in to create a post');
+                    window.location.href = 'login.html';
+                    return false;
+                }
+                return true;
+            }
+
+            // Initialize the page with auth check
+            if (!checkAuth()) {
+                return;
+            }
+
+            // DOM Elements
+            const postTitle = document.getElementById('postTitle');
+            const editorContent = document.getElementById('editorContent');
+            const statusSelect = document.getElementById('statusSelect');
+            const visibilitySelect = document.getElementById('visibilitySelect');
+            const publishDate = document.getElementById('publishDate');
+            const publishButton = document.getElementById('publishBtn');
+            const categoriesSelect = document.getElementById('categoriesSelect');
+            const tagsInput = document.getElementById('tagsInput');
+            const tagsContainer = document.getElementById('tagsContainer');
+            const featuredImageInput = document.getElementById('featuredImage');
+            const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+            const metaTitle = document.getElementById('metaTitle');
+            const metaDescription = document.getElementById('metaDescription');
+            const slugInput = document.getElementById('slugInput');
+            const saveDraftBtn = document.getElementById('saveDraftBtn');
+            const previewBtn = document.getElementById('previewBtn');
+            const wordCount = document.getElementById('wordCount');
+            
+            // Toolbar buttons
+            const boldBtn = document.getElementById('boldBtn');
+            const italicBtn = document.getElementById('italicBtn');
+            const headingBtn = document.getElementById('headingBtn');
+            const quoteBtn = document.getElementById('quoteBtn');
+            const linkBtn = document.getElementById('linkBtn');
+            const imageBtn = document.getElementById('imageBtn');
+            const videoBtn = document.getElementById('videoBtn');
+            const codeBtn = document.getElementById('codeBtn');
+            const listBtn = document.getElementById('listBtn');
+            const numberedListBtn = document.getElementById('numberedListBtn');
+            const undoBtn = document.getElementById('undoBtn');
+            const redoBtn = document.getElementById('redoBtn');
+
+            // Initialize tags array with existing tags
+            let tags = ['blogging', 'writing', 'content'];
+            let featuredImageUrl = null;
+
+            // Word count functionality
+            function updateWordCount() {
+                const text = editorContent.innerText.trim();
+                const wordCountValue = text === '' ? 0 : text.split(/\s+/).length;
+                wordCount.textContent = `${wordCountValue} words`;
+            }
+
+            editorContent.addEventListener('input', updateWordCount);
+
+            // Text formatting functions
+            function formatText(command, value = null) {
+                document.execCommand(command, false, value);
+                editorContent.focus();
+            }
+
+            // Event listeners for formatting buttons
+            boldBtn.addEventListener('click', () => formatText('bold'));
+            italicBtn.addEventListener('click', () => formatText('italic'));
+            headingBtn.addEventListener('click', () => formatText('formatBlock', '<h2>'));
+            quoteBtn.addEventListener('click', () => formatText('formatBlock', '<blockquote>'));
+            linkBtn.addEventListener('click', () => {
+                const url = prompt('Enter the URL:');
+                if (url) formatText('createLink', url);
+            });
+            imageBtn.addEventListener('click', () => {
+                const url = prompt('Enter the image URL:');
+                if (url) formatText('insertImage', url);
+            });
+            listBtn.addEventListener('click', () => formatText('insertUnorderedList'));
+            numberedListBtn.addEventListener('click', () => formatText('insertOrderedList'));
+            undoBtn.addEventListener('click', () => formatText('undo'));
+            redoBtn.addEventListener('click', () => formatText('redo'));
+
+            // Tags functionality
+            function renderTags() {
+                tagsContainer.innerHTML = '';
+                tags.forEach((tag, index) => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag';
+                    tagElement.innerHTML = `${tag} <i class="fas fa-times" data-index="${index}"></i>`;
+                    tagsContainer.appendChild(tagElement);
+                });
+
+                // Add event listeners to remove buttons
+                document.querySelectorAll('.tag i').forEach(icon => {
+                    icon.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const index = parseInt(this.getAttribute('data-index'));
+                        tags.splice(index, 1);
+                        renderTags();
+                    });
+                });
+            }
+
+            tagsInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    const tag = this.value.trim();
+                    if (tag && !tags.includes(tag)) {
+                        tags.push(tag);
+                        renderTags();
+                        this.value = '';
+                    }
+                }
+            });
+
+            // Initialize tags display
+            renderTags();
+
+            // Featured image handling
+            uploadPlaceholder.addEventListener('click', function() {
+                featuredImageInput.click();
+            });
+
+            featuredImageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // In a real app, you would upload the file to a server
+                    // For this demo, we'll just create a local URL
+                    const imageUrl = URL.createObjectURL(file);
+                    featuredImageUrl = imageUrl;
+                    
+                    uploadPlaceholder.innerHTML = `
+                        <img src="${imageUrl}" style="max-width: 100%; max-height: 200px; border-radius: 4px;">
+                        <p>${file.name}</p>
+                    `;
+                }
+            });
+
+            // Generate slug from title
+            postTitle.addEventListener('blur', function() {
+                if (!slugInput.value) {
+                    const slug = this.value.toLowerCase()
+                        .replace(/[^\w\s]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-');
+                    slugInput.value = slug;
+                }
+            });
+
+            // Form submission
+            async function submitBlogPost(isDraft = false) {
+                // 1. Check authentication and get token
+                const token = localStorage.getItem('blogzone_token');
+                if (!token) {
+                    alert('Session expired. Please log in again.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // 2. Validate required fields
+                const title = postTitle.value.trim();
+                if (!title) {
+                    alert('Please enter a title for your post');
+                    postTitle.focus();
+                    return;
+                }
+
+                const content = editorContent.innerHTML;
+                if (!content || content === '<p>Start writing your post here...</p>') {
+                    alert('Please write some content for your post');
+                    editorContent.focus();
+                    return;
+                }
+
+                // 3. Prepare the payload
+                const payload = {
+                    title,
+                    content,
+                    status: isDraft ? 'draft' : statusSelect.value.toLowerCase(),
+                    visibility: visibilitySelect.value.toLowerCase(),
+                    categories: Array.from(categoriesSelect.selectedOptions).map(opt => opt.value),
+                    tags,
+                    seo: {
+                        metaTitle: metaTitle.value.trim() || title,
+                        metaDescription: metaDescription.value.trim(),
+                        slug: slugInput.value.trim() || generateSlug(title)
+                    },
+                    featuredImage: featuredImageUrl || null,
+                    publishedAt: !isDraft ? new Date().toISOString() : null
+                };
+
+                // 4. Show loading state
+                const originalBtnText = publishButton.innerHTML;
+                publishButton.disabled = true;
+                publishButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${isDraft ? 'Saving...' : 'Publishing...'}`;
+
+                try {
+                    // 5. Make the API call
+                    const response = await fetch('http://localhost:3000/api/blogs', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    // 6. Handle response
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+
+                    // 7. Success handling
+                    showToast(`Post ${isDraft ? 'saved as draft' : 'published'} successfully!`, 'success');
+                    
+                    // Redirect to edit page or dashboard
+                    setTimeout(() => {
+                        window.location.href = isDraft 
+                            ? 'dashboard.html?tab=drafts' 
+                            : `edit-post.html?id=${result.id}`;
+                    }, 1500);
+
+                } catch (error) {
+                    // 8. Error handling
+                    console.error('Submission error:', error);
+                    
+                    let userMessage = 'Failed to submit post';
+                    if (error.message.includes('401')) {
+                        userMessage = 'Session expired. Redirecting to login...';
+                        localStorage.removeItem('blogzone_token');
+                        setTimeout(() => window.location.href = 'login.html', 2000);
+                    } else if (error.message.includes('network')) {
+                        userMessage = 'Network error. Please check your connection.';
+                    }
+
+                    showToast(userMessage, 'error');
+                } finally {
+                    // 9. Reset UI state
+                    publishButton.disabled = false;
+                    publishButton.innerHTML = originalBtnText;
+                }
+            }
+
+            // Helper function to generate URL slugs
+            function generateSlug(title) {
+                return title.toLowerCase()
+                    .replace(/[^\w\s]/g, '')
+                    .trim()
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-');
+            }
+
+            // Helper function to show toast notifications
+            function showToast(message, type = 'info') {
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        ${type === 'error' ? '<i class="fas fa-exclamation-circle"></i>' : 
+                         type === 'success' ? '<i class="fas fa-check-circle"></i>' : 
+                         '<i class="fas fa-info-circle"></i>'}
+                    </div>
+                    <div class="toast-message">${message}</div>
+                `;
+                
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 5000);
+            }
+
+            // Event listeners for buttons
+            publishButton.addEventListener('click', () => submitBlogPost(false));
+            saveDraftBtn.addEventListener('click', () => submitBlogPost(true));
+            previewBtn.addEventListener('click', () => {
+                alert('Preview functionality would show how the post will look when published');
+            });
+
+            // Initialize datetime picker with current time
+            const now = new Date();
+            const timezoneOffset = now.getTimezoneOffset() * 60000;
+            const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
+            publishDate.value = localISOTime;
+
+            // Set user name in header
+            const user = JSON.parse(localStorage.getItem('blogzone_user'));
+            if (user && user.email) {
+                document.querySelector('.user-name').textContent = user.email.split('@')[0];
+            }
+
+            // Initialize word count
+            updateWordCount();
+        });
+    </script>
+</body>
+</html>

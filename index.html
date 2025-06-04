@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogZone | The Modern Blogging Platform</title>
+    <meta name="description" content="A centralized platform for bloggers to create, share and monetize their content">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="gateway-page">
+        <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>BlogZone</span>
+            </a>
+            
+            <div class="nav-links">
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="/dashboard.html">Dashboard</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Log In</a>
+                    <a href="signup.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html" class="btn-primary">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <h1>Your Words, <span class="highlight">Readers</span> and <span class="text-gradient">Writers</span> Connect</span></h1>
+                <p class="subtitle">One platform, two amazing experiences</p>
+                
+                <div class="cta-buttons">
+                    <a href="signup.html" class="btn btn-primary btn-large">Get Started Now</a>
+                </div>
+            </div>
+            
+            <div class="hero-image animate-slide-in">
+                <img src="/assets/images/4309857.jpg" alt="Person writing on laptop">
+                <div class="floating-badge">
+                    <i class="fas fa-rocket"></i>
+                    <span>Trending on BlogZone</span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+        <main class="gateway-main">
+            <div class="gateway-hero">
+                <div class="gateway-cards">
+                    <div class="gateway-card reader-flow">
+                        <div class="card-icon">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h2>Continue as Reader</h2>
+                        <p>Discover amazing content tailored to your interests</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-check"></i> Personalized feed</span>
+                            <span><i class="fas fa-check"></i> Save favorites</span>
+                            <span><i class="fas fa-check"></i> Join discussions</span>
+                        </div>
+                        <a href="/readersignup.html" class="btn btn-outline">Explore Content</a>
+                        <a href="signup.html?role=reader" class="card-footer-link">or create reader account</a>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+                    
+                    <div class="gateway-card writer-flow">
+                        <div class="card-icon">
+                            <i class="fas fa-keyboard"></i>
+                        </div>
+                        <h2>Continue as Writer</h2>
+                        <p>Publish your work and build your audience</p>
+                        <div class="card-features">
+                            <span><i class="fas fa-check"></i> Beautiful editor</span>
+                            <span><i class="fas fa-check"></i> Audience analytics</span>
+                            <span><i class="fas fa-check"></i> Monetization</span>
+                        </div>
+                        <a href="/writer.html" class="btn btn-primary">Start Writing</a>
+                        <a href="signup.html?role=writer" class="card-footer-link">or create writer account</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="gateway-footer">
+            <p>Already have an account? <a href="login.html">Log in</a></p>
+        </footer>
+    </div>
+</body>
+</html>

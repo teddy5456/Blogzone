@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | BlogZone</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-pen-fancy"></i>
+                <span>BlogZone</span>
+            </a>
+            
+            <div class="auth-buttons">
+                <span>Don't have an account?</span>
+                <a href="signup.html" class="btn btn-outline">Sign Up</a>
+            </div>
+            
+            <button class="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <ul>
+            <li><span>Don't have an account?</span></li>
+            <li><a href="signup.html" class="btn btn-outline">Sign Up</a></li>
+        </ul>
+    </div>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="container">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Welcome Back</h1>
+                    <p>Log in to your BlogZone account</p>
+                </div>
+                
+                <div class="auth-social">
+                    <button class="btn btn-social google">
+                        <i class="fab fa-google"></i> Continue with Google
+                    </button>
+                    <button class="btn btn-social facebook">
+                        <i class="fab fa-facebook-f"></i> Continue with Facebook
+                    </button>
+                    <button class="btn btn-social twitter">
+                        <i class="fab fa-twitter"></i> Continue with Twitter
+                    </button>
+                </div>
+                
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+                
+                <form id="login-form" class="auth-form">
+                    <div class="form-group">
+                        <label for="email">Email or Username</label>
+                        <input type="text" id="email" name="email" required>
+                        <div class="form-error" id="email-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-input">
+                            <input type="password" id="password" name="password" required>
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="form-error" id="password-error"></div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                        <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                </div>
+            </div>
+            
+            <div class="auth-image">
+                <img src="/assets/images/6333050.jpg" alt="Person logging in">
+                <div class="auth-quote">
+                    <blockquote>
+                        "With BlogZone, I can focus on writing while they handle the rest."
+                    </blockquote>
+                    <div class="quote-author">
+                        <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/rockcms/2024-09/michael-keaton-today-sk-240904-9860e0.jpg" alt="Michael Chen">
+                        <div>
+                            <strong>Michael Chen</strong>
+                            <span>Tech Writer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/authReader.js"></script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
