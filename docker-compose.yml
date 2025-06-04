@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo
+    container_name: blogzone-mongo
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  backend:
+    build:
+      context: ./blogzone-backend
+      dockerfile: Dockerfile
+    container_name: blogzone-backend
+    env_file:
+      - ./blogzone-backend/.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  frontend:
+    image: nginx:latest
+    container_name: blogzone-frontend
+    volumes:
+      - ./:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:
