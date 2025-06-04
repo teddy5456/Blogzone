@@ -1,8 +1,10 @@
 const { parse } = require('url');
-const { 
-    registerUser, 
-    loginUser 
+const {
+  registerUser,
+  loginUser,
+  getUserById
 } = require('./controllers/userController');
+
 const { 
     createBlog, 
     getBlogs, 
@@ -37,6 +39,10 @@ function handleRequest(req, res) {
     } else if (pathname === '/api/users/login' && method === 'POST') {
         loginUser(req, res);
     }
+    else if (/^\/api\/users\/[a-fA-F0-9]{24}$/.test(pathname) && method === 'GET') {
+  getUserById(req, res);
+}
+
 
     // Blog routes
     else if (pathname === '/api/blogs' && method === 'GET') {

@@ -1,7 +1,34 @@
 const { connectToDatabase } = require('../db');
 const bcrypt = require('bcryptjs');
+const { ObjectId } = require('mongodb');
 const jwt = require('jsonwebtoken');
 const { validateEmail, validatePassword } = require('../utils/validation');
+
+async function getUserById(req, res) {
+  try {
+    // Extract user ID from URL
+    const userId = req.url.split('/').pop();
+
+    if (!ObjectId.isValid(userId)) {
+      return respond(res, 400, { message: 'Invalid user ID' });
+    }
+
+    const db = await connectToDatabase();
+    const user = await db.collection('Users').findOne(
+      { _id: new ObjectId(userId) },
+      { projection: { password: 0 } } // exclude password from response
+    );
+
+    if (!user) {
+      return respond(res, 404, { message: 'User not found' });
+    }
+
+    respond(res, 200, user);
+  } catch (error) {
+    console.error('Get user error:', error);
+    respond(res, 500, { message: 'Error fetching user', error: error.message });
+  }
+}
 
 // User registration
 async function registerUser(req, res) {
@@ -118,4 +145,4 @@ function respond(res, status, data) {
     res.end(JSON.stringify(data));
 }
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, getUserById };
